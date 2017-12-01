@@ -147,7 +147,7 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Up:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() + 1 < ROW_COUNT)
+                                frog.rowNum() + 1 <= ROW_COUNT)
                                 frog.move('U');
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
@@ -433,5 +433,16 @@ bool Game:: bounds_check(float x, float y){
         return false;
     }
 }
+
+
+bool Game::checkWin(){
+    //checks if the frog passes the last row of logs
+    //no bounds on x yet
+    if (frog.posY() < rows[13]){
+        return true;
+    }
+    return false;
+}
+
 
 //stubs
