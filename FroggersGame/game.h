@@ -33,6 +33,8 @@ public:
     int logCollision();
     bool waterCollision();
     void drawPrompt();  //when frog dies, draw text on screen
+    bool checkWin();
+
 
 private:
     char _command;
