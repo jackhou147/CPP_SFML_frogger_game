@@ -80,6 +80,10 @@ void Game:: update(){
         //3.3 if the frog collides with water,
         //but its not on a log,set it to dead
             frog.set_dead(1);
+        }else if(checkWin()){
+            //if the frog wins
+            //using reset() for testing purposes
+            reset();
         }else {
             //...
             //if the frog is on a log
