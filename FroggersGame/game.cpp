@@ -48,11 +48,29 @@ void Game::drawBg(){
 }
 
 void Game::run(){
+
+    //-----start playing music
+    sf::Music music;
+    if (!music.openFromFile("assets/frogger.ogg"))
+        cout<<"music can't be played"<<endl; // error
+    cout<<"music loaded"<<endl;
+    music.setLoop(true);
+    music.play();
+
+
+    //------game loop
     while(window.isOpen()){
         update();
         processEvents();
         render();
     }
+}
+
+int Game::playMusic(){
+    /*
+     * Play background music
+     */
+
 }
 
 void Game:: update(){
@@ -83,7 +101,7 @@ void Game:: update(){
         }else if(checkWin()){
             //if the frog wins
             //using reset() for testing purposes
-            reset();
+            //reset();
         }else {
             //...
             //if the frog is on a log
@@ -93,7 +111,7 @@ void Game:: update(){
                 float tempX = frog.posX() + (logs[frog.log()].dir() * logs[frog.log()].speed());
                 //cout<<"tempX: "<<tempX<<endl;
                 //if the "moved" frog is within boundary, move it
-                if(bounds_check(tempX, frog.posY())){
+                if(bounds_check(tempX > SCREEN_WIDTH/2 ? tempX+2*frog.width():tempX, frog.posY())){
                     frog.set_posX(tempX);
                     //cout<<"posX: "<<frog.posX();
                 }
@@ -151,11 +169,12 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Up:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() + 1 <= ROW_COUNT)
+                                frog.rowNum() + 1 <= ROW_COUNT){
                                 if (frog.rowNum() == 13 && !checkColumn()){
                                     break;
                                 }
                                 frog.move('U');
+                            }
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
                             break;
