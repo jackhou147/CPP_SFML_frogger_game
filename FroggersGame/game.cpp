@@ -101,7 +101,7 @@ void Game:: update(){
         }else if(checkWin()){
             //if the frog wins
             //using reset() for testing purposes
-            reset();
+            //reset();
         }else {
             //...
             //if the frog is on a log
@@ -111,7 +111,7 @@ void Game:: update(){
                 float tempX = frog.posX() + (logs[frog.log()].dir() * logs[frog.log()].speed());
                 //cout<<"tempX: "<<tempX<<endl;
                 //if the "moved" frog is within boundary, move it
-                if(bounds_check(tempX, frog.posY())){
+                if(bounds_check(tempX > SCREEN_WIDTH/2 ? tempX+2*frog.width():tempX, frog.posY())){
                     frog.set_posX(tempX);
                     //cout<<"posX: "<<frog.posX();
                 }
