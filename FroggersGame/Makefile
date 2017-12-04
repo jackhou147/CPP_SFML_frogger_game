@@ -218,6 +218,7 @@ DIST          = /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/spec
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/toolchain.prf \
@@ -422,6 +423,7 @@ Makefile: FroggersGame.pro /Users/newuser/Applications/5.9.2/clang_64/mkspecs/ma
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/toolchain.prf \
@@ -602,6 +604,7 @@ Makefile: FroggersGame.pro /Users/newuser/Applications/5.9.2/clang_64/mkspecs/ma
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/qt_config.prf:
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/newuser/Applications/5.9.2/clang_64/mkspecs/features/toolchain.prf:
@@ -646,6 +649,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -824,11 +828,153 @@ game.o: game.cpp game.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
 car.o: car.cpp car.h \
-		constants.h
+		constants.h \
+		/usr/local/include/SFML/Graphics.hpp \
+		/usr/local/include/SFML/Window.hpp \
+		/usr/local/include/SFML/System.hpp \
+		/usr/local/include/SFML/Config.hpp \
+		/usr/local/include/SFML/System/Clock.hpp \
+		/usr/local/include/SFML/System/Export.hpp \
+		/usr/local/include/SFML/System/Time.hpp \
+		/usr/local/include/SFML/System/Err.hpp \
+		/usr/local/include/SFML/System/FileInputStream.hpp \
+		/usr/local/include/SFML/System/InputStream.hpp \
+		/usr/local/include/SFML/System/NonCopyable.hpp \
+		/usr/local/include/SFML/System/Lock.hpp \
+		/usr/local/include/SFML/System/MemoryInputStream.hpp \
+		/usr/local/include/SFML/System/Mutex.hpp \
+		/usr/local/include/SFML/System/Sleep.hpp \
+		/usr/local/include/SFML/System/String.hpp \
+		/usr/local/include/SFML/System/Utf.hpp \
+		/usr/local/include/SFML/System/Utf.inl \
+		/usr/local/include/SFML/System/String.inl \
+		/usr/local/include/SFML/System/Thread.hpp \
+		/usr/local/include/SFML/System/Thread.inl \
+		/usr/local/include/SFML/System/ThreadLocal.hpp \
+		/usr/local/include/SFML/System/ThreadLocalPtr.hpp \
+		/usr/local/include/SFML/System/ThreadLocalPtr.inl \
+		/usr/local/include/SFML/System/Vector2.hpp \
+		/usr/local/include/SFML/System/Vector2.inl \
+		/usr/local/include/SFML/System/Vector3.hpp \
+		/usr/local/include/SFML/System/Vector3.inl \
+		/usr/local/include/SFML/Window/Context.hpp \
+		/usr/local/include/SFML/Window/Export.hpp \
+		/usr/local/include/SFML/Window/GlResource.hpp \
+		/usr/local/include/SFML/Window/ContextSettings.hpp \
+		/usr/local/include/SFML/Window/Event.hpp \
+		/usr/local/include/SFML/Window/Joystick.hpp \
+		/usr/local/include/SFML/Window/Keyboard.hpp \
+		/usr/local/include/SFML/Window/Mouse.hpp \
+		/usr/local/include/SFML/Window/Sensor.hpp \
+		/usr/local/include/SFML/Window/Touch.hpp \
+		/usr/local/include/SFML/Window/VideoMode.hpp \
+		/usr/local/include/SFML/Window/Window.hpp \
+		/usr/local/include/SFML/Window/WindowHandle.hpp \
+		/usr/local/include/SFML/Window/WindowStyle.hpp \
+		/usr/local/include/SFML/Graphics/BlendMode.hpp \
+		/usr/local/include/SFML/Graphics/Export.hpp \
+		/usr/local/include/SFML/Graphics/CircleShape.hpp \
+		/usr/local/include/SFML/Graphics/Shape.hpp \
+		/usr/local/include/SFML/Graphics/Drawable.hpp \
+		/usr/local/include/SFML/Graphics/RenderStates.hpp \
+		/usr/local/include/SFML/Graphics/Transform.hpp \
+		/usr/local/include/SFML/Graphics/Rect.hpp \
+		/usr/local/include/SFML/Graphics/Rect.inl \
+		/usr/local/include/SFML/Graphics/Transformable.hpp \
+		/usr/local/include/SFML/Graphics/VertexArray.hpp \
+		/usr/local/include/SFML/Graphics/Vertex.hpp \
+		/usr/local/include/SFML/Graphics/Color.hpp \
+		/usr/local/include/SFML/Graphics/PrimitiveType.hpp \
+		/usr/local/include/SFML/Graphics/ConvexShape.hpp \
+		/usr/local/include/SFML/Graphics/Font.hpp \
+		/usr/local/include/SFML/Graphics/Glyph.hpp \
+		/usr/local/include/SFML/Graphics/Texture.hpp \
+		/usr/local/include/SFML/Graphics/Image.hpp \
+		/usr/local/include/SFML/Graphics/RectangleShape.hpp \
+		/usr/local/include/SFML/Graphics/RenderTarget.hpp \
+		/usr/local/include/SFML/Graphics/View.hpp \
+		/usr/local/include/SFML/Graphics/RenderTexture.hpp \
+		/usr/local/include/SFML/Graphics/RenderWindow.hpp \
+		/usr/local/include/SFML/Graphics/Shader.hpp \
+		/usr/local/include/SFML/Graphics/Glsl.hpp \
+		/usr/local/include/SFML/Graphics/Glsl.inl \
+		/usr/local/include/SFML/Graphics/Sprite.hpp \
+		/usr/local/include/SFML/Graphics/Text.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o car.o car.cpp
 
 log.o: log.cpp log.h \
-		constants.h
+		constants.h \
+		/usr/local/include/SFML/Graphics.hpp \
+		/usr/local/include/SFML/Window.hpp \
+		/usr/local/include/SFML/System.hpp \
+		/usr/local/include/SFML/Config.hpp \
+		/usr/local/include/SFML/System/Clock.hpp \
+		/usr/local/include/SFML/System/Export.hpp \
+		/usr/local/include/SFML/System/Time.hpp \
+		/usr/local/include/SFML/System/Err.hpp \
+		/usr/local/include/SFML/System/FileInputStream.hpp \
+		/usr/local/include/SFML/System/InputStream.hpp \
+		/usr/local/include/SFML/System/NonCopyable.hpp \
+		/usr/local/include/SFML/System/Lock.hpp \
+		/usr/local/include/SFML/System/MemoryInputStream.hpp \
+		/usr/local/include/SFML/System/Mutex.hpp \
+		/usr/local/include/SFML/System/Sleep.hpp \
+		/usr/local/include/SFML/System/String.hpp \
+		/usr/local/include/SFML/System/Utf.hpp \
+		/usr/local/include/SFML/System/Utf.inl \
+		/usr/local/include/SFML/System/String.inl \
+		/usr/local/include/SFML/System/Thread.hpp \
+		/usr/local/include/SFML/System/Thread.inl \
+		/usr/local/include/SFML/System/ThreadLocal.hpp \
+		/usr/local/include/SFML/System/ThreadLocalPtr.hpp \
+		/usr/local/include/SFML/System/ThreadLocalPtr.inl \
+		/usr/local/include/SFML/System/Vector2.hpp \
+		/usr/local/include/SFML/System/Vector2.inl \
+		/usr/local/include/SFML/System/Vector3.hpp \
+		/usr/local/include/SFML/System/Vector3.inl \
+		/usr/local/include/SFML/Window/Context.hpp \
+		/usr/local/include/SFML/Window/Export.hpp \
+		/usr/local/include/SFML/Window/GlResource.hpp \
+		/usr/local/include/SFML/Window/ContextSettings.hpp \
+		/usr/local/include/SFML/Window/Event.hpp \
+		/usr/local/include/SFML/Window/Joystick.hpp \
+		/usr/local/include/SFML/Window/Keyboard.hpp \
+		/usr/local/include/SFML/Window/Mouse.hpp \
+		/usr/local/include/SFML/Window/Sensor.hpp \
+		/usr/local/include/SFML/Window/Touch.hpp \
+		/usr/local/include/SFML/Window/VideoMode.hpp \
+		/usr/local/include/SFML/Window/Window.hpp \
+		/usr/local/include/SFML/Window/WindowHandle.hpp \
+		/usr/local/include/SFML/Window/WindowStyle.hpp \
+		/usr/local/include/SFML/Graphics/BlendMode.hpp \
+		/usr/local/include/SFML/Graphics/Export.hpp \
+		/usr/local/include/SFML/Graphics/CircleShape.hpp \
+		/usr/local/include/SFML/Graphics/Shape.hpp \
+		/usr/local/include/SFML/Graphics/Drawable.hpp \
+		/usr/local/include/SFML/Graphics/RenderStates.hpp \
+		/usr/local/include/SFML/Graphics/Transform.hpp \
+		/usr/local/include/SFML/Graphics/Rect.hpp \
+		/usr/local/include/SFML/Graphics/Rect.inl \
+		/usr/local/include/SFML/Graphics/Transformable.hpp \
+		/usr/local/include/SFML/Graphics/VertexArray.hpp \
+		/usr/local/include/SFML/Graphics/Vertex.hpp \
+		/usr/local/include/SFML/Graphics/Color.hpp \
+		/usr/local/include/SFML/Graphics/PrimitiveType.hpp \
+		/usr/local/include/SFML/Graphics/ConvexShape.hpp \
+		/usr/local/include/SFML/Graphics/Font.hpp \
+		/usr/local/include/SFML/Graphics/Glyph.hpp \
+		/usr/local/include/SFML/Graphics/Texture.hpp \
+		/usr/local/include/SFML/Graphics/Image.hpp \
+		/usr/local/include/SFML/Graphics/RectangleShape.hpp \
+		/usr/local/include/SFML/Graphics/RenderTarget.hpp \
+		/usr/local/include/SFML/Graphics/View.hpp \
+		/usr/local/include/SFML/Graphics/RenderTexture.hpp \
+		/usr/local/include/SFML/Graphics/RenderWindow.hpp \
+		/usr/local/include/SFML/Graphics/Shader.hpp \
+		/usr/local/include/SFML/Graphics/Glsl.hpp \
+		/usr/local/include/SFML/Graphics/Glsl.inl \
+		/usr/local/include/SFML/Graphics/Sprite.hpp \
+		/usr/local/include/SFML/Graphics/Text.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o log.o log.cpp
 
 frog.o: frog.cpp frog.h \
@@ -902,7 +1048,8 @@ frog.o: frog.cpp frog.h \
 		/usr/local/include/SFML/Graphics/Glsl.hpp \
 		/usr/local/include/SFML/Graphics/Glsl.inl \
 		/usr/local/include/SFML/Graphics/Sprite.hpp \
-		/usr/local/include/SFML/Graphics/Text.hpp
+		/usr/local/include/SFML/Graphics/Text.hpp \
+		constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o frog.o frog.cpp
 
 ####### Install

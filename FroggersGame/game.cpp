@@ -48,11 +48,29 @@ void Game::drawBg(){
 }
 
 void Game::run(){
+
+    //-----start playing music
+    sf::Music music;
+    if (!music.openFromFile("assets/frogger.ogg"))
+        cout<<"music can't be played"<<endl; // error
+    cout<<"music loaded"<<endl;
+    music.setLoop(true);
+    music.play();
+
+
+    //------game loop
     while(window.isOpen()){
         update();
         processEvents();
         render();
     }
+}
+
+int Game::playMusic(){
+    /*
+     * Play background music
+     */
+
 }
 
 void Game:: update(){
