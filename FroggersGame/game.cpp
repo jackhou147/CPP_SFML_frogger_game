@@ -152,6 +152,9 @@ void Game:: processEvents(){
                         case sf::Keyboard::Up:
                             if (frog.dead() == -1 &&
                                 frog.rowNum() + 1 <= ROW_COUNT)
+                                if (frog.rowNum() == 13 && !checkColumn()){
+                                    break;
+                                }
                                 frog.move('U');
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
@@ -208,6 +211,11 @@ void Game:: render(){
         //draw text on screen, ask for input: restart?
         drawPrompt();
         //if user wants to restart, reset the game
+        if(_command == 'R')
+            reset();
+    }
+    if(checkWin()){
+        drawPrompt();
         if(_command == 'R')
             reset();
     }
@@ -403,6 +411,30 @@ void Game::drawPrompt(){
     {
         // error...
         cout<<endl<<"cant load font"<<endl;
+    }else if(checkWin()){
+        sf::Text text;
+
+        // select the font
+        text.setFont(font); // font is a sf::Font
+
+        // set the string to display
+        text.setString("YOU WON!! Restart? [R]");
+
+        // set the character size
+        text.setCharacterSize(34); // in pixels, not points!
+
+        // set the color
+        text.setFillColor(sf::Color::Red);
+
+        // set the text style
+        text.setStyle(sf::Text::Bold);
+
+        // set position
+        text.setPosition((SCREEN_WIDTH-(text.getGlobalBounds().width))/2,
+                         (SCREEN_HEIGHT-(text.getGlobalBounds().height))/2);
+
+        // inside the main loop, between window.clear() and window.display()
+        window.draw(text);
     }else{
         sf::Text text;
 
@@ -410,7 +442,7 @@ void Game::drawPrompt(){
         text.setFont(font); // font is a sf::Font
 
         // set the string to display
-        text.setString("GAME OVER! Restart?");
+        text.setString("GAME OVER! Restart? [R]");
 
         // set the character size
         text.setCharacterSize(34); // in pixels, not points!
@@ -441,12 +473,29 @@ bool Game:: bounds_check(float x, float y){
 
 bool Game::checkWin(){
     //checks if the frog passes the last row of logs
-    //no bounds on x yet
+
     if (frog.posY() < rows[13]){
         return true;
     }
     return false;
 }
+
+bool Game::checkColumn(){
+    //checks where the frog is relative to the "winning" row
+    //purpose: prevents the frog from entering the "winning row"
+    //         unless the frog is lined up with the open column
+    if (
+        (frog.posX() <= 1310 && frog.posX() >= 1240) ||
+        (frog.posX() <= 110 && frog.posX() >= 40) ||
+        (frog.posX() <= 410 && frog.posX() >= 340) ||
+        (frog.posX() <= 720 && frog.posX() >= 640) ||
+        (frog.posX() <= 1010 && frog.posX() >= 940)
+        ){
+        return true;
+    }
+    return false;
+}
+
 
 
 //stubs

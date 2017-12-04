@@ -113,7 +113,15 @@ void Frog::move(char dir){
 void Frog::up(){
     _facing = 'U';
     //SFML position
-    frog_sprite.setPosition(frog_sprite.getPosition().x, rows[++_rowNum]);
+    if (_rowNum > 12){
+        //if frog is in the row before winning row
+        frog_sprite.setPosition(frog_sprite.getPosition().x, rows[_rowNum] - 50);
+        ++_rowNum;
+    }
+    else{
+        //if frog is in any other row
+        frog_sprite.setPosition(frog_sprite.getPosition().x, rows[++_rowNum]);
+    }
     //update local coordinate values
     _posX = frog_sprite.getPosition().x;
     _posY = frog_sprite.getPosition().y;

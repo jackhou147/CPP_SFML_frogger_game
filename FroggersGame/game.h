@@ -33,7 +33,8 @@ public:
     int logCollision();
     bool waterCollision();
     void drawPrompt();  //when frog dies, draw text on screen
-    bool checkWin();
+    bool checkWin();    //checks if frog is on the winning row
+    bool checkColumn(); //checks if frog is within bounds of last columns
 
 
 private:
