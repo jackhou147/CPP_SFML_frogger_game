@@ -98,6 +98,10 @@ void Game:: update(){
         //3.3 if the frog collides with water,
         //but its not on a log,set it to dead
             frog.set_dead(1);
+        }else if(checkWin()){
+            //if the frog wins
+            //using reset() for testing purposes
+            //reset();
         }else {
             //...
             //if the frog is on a log
@@ -165,11 +169,12 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Up:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() + 1 <= ROW_COUNT)
+                                frog.rowNum() + 1 <= ROW_COUNT){
                                 if (frog.rowNum() == 13 && !checkColumn()){
                                     break;
                                 }
                                 frog.move('U');
+                            }
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
                             break;
