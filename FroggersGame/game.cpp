@@ -137,7 +137,8 @@ void Game:: processEvents(){
                         //=====press left/up/down/right, move frog=======
                         case sf::Keyboard::Left:
                             if (frog.dead() == -1 &&
-                                    frog.posX() - ROW_HEIGHT >= 0)
+                                frog.posX() - ROW_HEIGHT >= 0 &&
+                                !checkWin())
                             {
                                 frog.move('L');
                                 cout<<endl<<"move left"<<endl;
@@ -149,7 +150,8 @@ void Game:: processEvents(){
                         case sf::Keyboard::Right:
                             cout<<endl<<"frog width: "<<frog.width()<<endl;
                             if (frog.dead() == -1 && //DO THIS WIDTH
-                                frog.posX()+frog.width() + ROW_HEIGHT <= SCREEN_WIDTH)
+                                frog.posX()+frog.width() + ROW_HEIGHT <= SCREEN_WIDTH &&
+                                !checkWin())
                                 frog.move('R');
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
@@ -157,7 +159,8 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Down:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() - 1 >= 0)
+                                frog.rowNum() - 1 >= 0 &&
+                                !checkWin())
                                 frog.move('D');
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
@@ -165,7 +168,8 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Up:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() + 1 <= ROW_COUNT){
+                                frog.rowNum() + 1 <= ROW_COUNT &&
+                                !checkWin()){
                                 if (frog.rowNum() == 13 && !checkColumn()){
                                     break;
                                 }
