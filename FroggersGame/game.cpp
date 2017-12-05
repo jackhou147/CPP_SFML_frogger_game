@@ -66,13 +66,6 @@ void Game::run(){
     }
 }
 
-int Game::playMusic(){
-    /*
-     * Play background music
-     */
-
-}
-
 void Game:: update(){
 
     //1. move car
@@ -109,11 +102,34 @@ void Game:: update(){
                 //if the "moved" frog is within boundary, move it
                 if(bounds_check(tempX > SCREEN_WIDTH/2 ? tempX+2*frog.width():tempX, frog.posY())){
                     frog.set_posX(tempX);
-                    //cout<<"posX: "<<frog.posX();
+                    cout<<"posX: "<<frog.posX();
                 }
             }
         }
     }
+}
+
+void Game:: render(){
+    window.clear(sf::Color::Transparent);
+    drawBg();
+    drawCars();
+    drawLogs();
+    drawFrog(frog.dead());
+    //if the frog is dead:
+    if(frog.dead() == 1){
+        cout<<"dead frog"<<endl;
+        //draw text on screen, ask for input: restart?
+        drawPrompt();
+        //if user wants to restart, reset the game
+        if(_command == 'R')
+            reset();
+    }
+    if(checkWin()){
+        drawPrompt();
+        if(_command == 'R')
+            reset();
+    }
+    window.display();
 }
 
 void Game:: processEvents(){
@@ -216,29 +232,6 @@ void Game::drawFrog(int dead){
             window.draw(deadFrog_sprite);
         }
     }
-}
-
-void Game:: render(){
-    window.clear(sf::Color::Transparent);
-    drawBg();
-    drawCars();
-    drawLogs();
-    drawFrog(frog.dead());
-    //if the frog is dead:
-    if(frog.dead() == 1){
-        cout<<"dead frog"<<endl;
-        //draw text on screen, ask for input: restart?
-        drawPrompt();
-        //if user wants to restart, reset the game
-        if(_command == 'R')
-            reset();
-    }
-    if(checkWin()){
-        drawPrompt();
-        if(_command == 'R')
-            reset();
-    }
-    window.display();
 }
 
 void Game:: makeCars(){
@@ -489,7 +482,6 @@ bool Game:: bounds_check(float x, float y){
     }
 }
 
-
 bool Game::checkWin(){
     //checks if the frog passes the last row of logs
 
@@ -514,7 +506,3 @@ bool Game::checkColumn(){
     }
     return false;
 }
-
-
-
-//stubs

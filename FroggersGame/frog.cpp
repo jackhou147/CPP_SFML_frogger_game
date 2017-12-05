@@ -38,25 +38,6 @@ Frog::Frog()
 
 }
 
-sf::Sprite Frog::sprite(){
-    return frog_sprite;
-}
-
-void Frog::set_facing(char facing){
-    facing = toupper(facing);
-    if(facing == 'U' ||
-        facing == 'D'||
-        facing == 'L'||
-        facing == 'R' )
-    {
-        _facing = facing;
-    }
-}
-
-char Frog::facing(){
-    return _facing;
-}
-
 void Frog::draw(sf::RenderWindow &window){
     if (_facing == 'U' ||
             _facing == 'D'||
@@ -71,25 +52,6 @@ void Frog::draw(sf::RenderWindow &window){
         );
         window.draw(frog_sprite);
     };
-}
-
-void Frog::set_posX(float posX){
-    cout<<"----set_posX: "<<posX;
-    _posX = posX;
-    frog_sprite.setPosition(_posX, frog_sprite.getPosition().y);
-}
-
-void Frog::set_posY(float posY){
-    _posY = posY;
-    frog_sprite.setPosition(frog_sprite.getPosition().x,_posY);
-}
-
-int Frog::posX(){
-    return _posX;
-}
-
-int Frog::posY(){
-    return _posY;
 }
 
 void Frog::move(char dir){
@@ -111,6 +73,9 @@ void Frog::move(char dir){
 }
 
 void Frog::up(){
+    /*
+     * Purpose: move the frog 1 unit up
+     */
     _facing = 'U';
     //SFML position
     if (_rowNum > 12){
@@ -128,6 +93,9 @@ void Frog::up(){
 }
 
 void Frog::down(){
+    /*
+     * Purpose: move the frog 1 unit down
+     */
     _facing = 'D';
     //SFML position
     frog_sprite.setPosition(frog_sprite.getPosition().x, rows[--_rowNum]);
@@ -137,6 +105,9 @@ void Frog::down(){
 }
 
 void Frog::left(){
+    /*
+     * Purpose: move the frog 1 unit to the left
+     */
     _facing = 'L';
     //SFML position
     frog_sprite.move(-1*ROW_HEIGHT, 0.f);
@@ -146,12 +117,45 @@ void Frog::left(){
 }
 
 void Frog::right(){
+    /*
+     * Purpose: move the frog 1 unit to the right
+     */
     _facing = 'R';
     //SFML position
     frog_sprite.move(ROW_HEIGHT, 0.f);
     //update local coordinate values
     _posX = frog_sprite.getPosition().x;
     _posY = frog_sprite.getPosition().y;
+}
+
+
+//-----------SETTERS-------------
+void Frog::set_posX(float posX){
+    cout<<"----set_posX: "<<posX;
+    _posX = posX;
+    frog_sprite.setPosition(_posX, frog_sprite.getPosition().y);
+}
+
+void Frog::set_posY(float posY){
+    _posY = posY;
+    frog_sprite.setPosition(frog_sprite.getPosition().x,_posY);
+}
+
+void Frog::set_facing(char facing){
+    facing = toupper(facing);
+    if(facing == 'U' ||
+        facing == 'D'||
+        facing == 'L'||
+        facing == 'R' )
+    {
+        _facing = facing;
+    }
+}
+
+
+//-----------GETTERS-------------
+char Frog::facing(){
+    return _facing;
 }
 
 float Frog::width(){
@@ -182,3 +186,14 @@ int Frog::dead(){
     return _dead;
 }
 
+int Frog::posX(){
+    return _posX;
+}
+
+int Frog::posY(){
+    return _posY;
+}
+
+sf::Sprite Frog::sprite(){
+    return frog_sprite;
+}

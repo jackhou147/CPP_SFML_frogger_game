@@ -43,11 +43,10 @@ private:
     char _command;
     sf::RenderWindow window;
     Frog frog;
-    vector<Car> cars;    //5 cars
-    vector<Log> logs;    //6 logs
-    sf::Texture bg_texture;
-    sf::Sprite bg_sprite;
-
+    vector<Car> cars;
+    vector<Log> logs;
+    sf::Texture bg_texture; //background texture
+    sf::Sprite bg_sprite;   //background sprite
 };
 
 #endif // GAME_H

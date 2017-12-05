@@ -134,7 +134,7 @@ void Car::wrap(){
     }
 }
 
-//getters
+//-----------GETTERS-------------
 int Car::lane(){
     return _lane;
 }
@@ -146,19 +146,22 @@ int Car::model(){
 int Car::width(){
     return _width;
 }
+
 int Car::length(){
     return _length;
 }
+
 int Car::posX(){
     return _posX;
 }
+
 int Car::posY(){
     return _posY;
 }
 
 
 
-//setters
+//-----------SETTERS-------------
 void Car::set_width(int width){
     _width = width;
 }
