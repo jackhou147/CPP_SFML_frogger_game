@@ -389,7 +389,7 @@ int Game:: logCollision(){
             frog.length(),
             logs[i].posX(),
             logs[i].posY(),
-            logs[i].width(),
+            logs[i].width()-30,
             logs[i].length()
         )){
             result = i;
