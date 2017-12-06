@@ -26,7 +26,6 @@ public:
     void update();
     void render();
     void reset();   //reset/restart the game
-    int playMusic();   //play background music
     void drawFrog(int dead);    //draw frog to window object
     bool bounds_check(float x, float y);
     bool collides(float x1, float y1, float w1, float l1,
