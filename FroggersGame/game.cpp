@@ -9,7 +9,7 @@ Game::Game()
     _command = '0';
     cout<<endl<<"creating screen"<<endl;
     window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Java my ass!");
-    window.setFramerateLimit(90);
+    window.setFramerateLimit(30);
 
     makeCars();
     makeLogs();
@@ -66,13 +66,6 @@ void Game::run(){
     }
 }
 
-int Game::playMusic(){
-    /*
-     * Play background music
-     */
-
-}
-
 void Game:: update(){
 
     //1. move car
@@ -109,11 +102,37 @@ void Game:: update(){
                 //if the "moved" frog is within boundary, move it
                 if(bounds_check(tempX > SCREEN_WIDTH/2 ? tempX+2*frog.width():tempX, frog.posY())){
                     frog.set_posX(tempX);
-                    //cout<<"posX: "<<frog.posX();
+                    cout<<"posX: "<<frog.posX();
                 }
             }
+//            if(frog.facing() == 'U'){
+
+//            }
         }
     }
+}
+
+void Game:: render(){
+    window.clear(sf::Color::Transparent);
+    drawBg();
+    drawCars();
+    drawLogs();
+    drawFrog();
+    //if the frog is dead:
+    if(frog.dead() == 1){
+        cout<<"dead frog"<<endl;
+        //draw text on screen, ask for input: restart?
+        drawPrompt();
+        //if user wants to restart, reset the game
+        if(_command == 'R')
+            reset();
+    }
+    if(checkWin()){
+        drawPrompt();
+        if(_command == 'R')
+            reset();
+    }
+    window.display();
 }
 
 void Game:: processEvents(){
@@ -159,7 +178,6 @@ void Game:: processEvents(){
 
                         case sf::Keyboard::Down:
                             if (frog.dead() == -1 &&
-                                frog.rowNum() - 1 >= 0 &&
                                 !checkWin())
                                 frog.move('D');
                             cout<<endl<<frog.facing()
@@ -178,67 +196,23 @@ void Game:: processEvents(){
                             cout<<endl<<frog.facing()
                                 <<"("<<frog.posX()<<","<<frog.posY()<<")"<<endl;
                             break;
-                    case sf::Keyboard::R:   //restart the game
-                        _command = 'R';
-                        break;
+
+                        case sf::Keyboard::R:   //restart the game
+                            if (frog.dead() == 1 || checkWin()){
+                            _command = 'R';
+                            }
+                            break;
                     }
                    break;
                default:
                    break;
            }
        }
-
 }
 
-void Game::drawFrog(int dead){
+void Game::drawFrog(){
     //if frog is not dead, draw the alive frog to window
-    if(dead == -1)
-        frog.draw(window);
-    else{
-        //if frog is dead, draw a dead frog sprite
-        sf::Texture deadFrog_texture;
-        sf::Sprite deadFrog_sprite;
-        if (!deadFrog_texture.loadFromFile("assets/dead_frog.png", sf::IntRect(4, 2, 19, 24)))
-        {
-            // error...
-            std::cout << "cannot load dead_frog.png" << std::endl;
-        }else{
-            //create sprite from texture
-            deadFrog_sprite.setTexture(deadFrog_texture);
-            //scale the sprite absolutely
-            deadFrog_sprite.setScale(
-                        50 / deadFrog_sprite.getLocalBounds().width,
-                        (ROW_HEIGHT-8)/deadFrog_sprite.getLocalBounds().height
-            );
-            //set position
-            deadFrog_sprite.setPosition(frog.posX(), frog.posY());
-            //draw on window
-            window.draw(deadFrog_sprite);
-        }
-    }
-}
-
-void Game:: render(){
-    window.clear(sf::Color::Transparent);
-    drawBg();
-    drawCars();
-    drawLogs();
-    drawFrog(frog.dead());
-    //if the frog is dead:
-    if(frog.dead() == 1){
-        cout<<"dead frog"<<endl;
-        //draw text on screen, ask for input: restart?
-        drawPrompt();
-        //if user wants to restart, reset the game
-        if(_command == 'R')
-            reset();
-    }
-    if(checkWin()){
-        drawPrompt();
-        if(_command == 'R')
-            reset();
-    }
-    window.display();
+    frog.draw(window);
 }
 
 void Game:: makeCars(){
@@ -368,7 +342,7 @@ bool Game:: carCollision(){
             frog.posY(),
             frog.width(),
             frog.length(),
-            cars[i].posX()-30,
+            cars[i].posX(),
             cars[i].posY(),
             cars[i].width(),
             cars[i].length()
@@ -396,7 +370,7 @@ int Game:: logCollision(){
             frog.length(),
             logs[i].posX(),
             logs[i].posY(),
-            logs[i].width(),
+            logs[i].width()-30,
             logs[i].length()
         )){
             result = i;
@@ -489,7 +463,6 @@ bool Game:: bounds_check(float x, float y){
     }
 }
 
-
 bool Game::checkWin(){
     //checks if the frog passes the last row of logs
 
@@ -514,7 +487,3 @@ bool Game::checkColumn(){
     }
     return false;
 }
-
-
-
-//stubs
