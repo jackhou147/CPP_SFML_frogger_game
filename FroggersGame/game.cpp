@@ -29,12 +29,18 @@ Game::Game()
 }
 
 void Game::drawLogs(){
+    /*
+     * Purpose: draw logs on window object
+     */
     for(int i=0; i < logs.size(); i++){
         logs[i].draw(window);
     }
 }
 
 void Game:: drawCars(){
+    /*
+     * Purpose: draw cars on window object
+     */
     for(int i=0; i < cars.size(); i++){
         cars[i].draw(window);
     }
@@ -48,6 +54,9 @@ void Game::drawBg(){
 }
 
 void Game::run(){
+    /*
+     * Purpose: game loop
+     */
 
     //-----start playing music
     sf::Music music;
@@ -67,6 +76,9 @@ void Game::run(){
 }
 
 void Game:: update(){
+    /*
+     * Purpose: update the position and states of all objects
+     */
 
     //1. move car
     for(int i=0; i<cars.size(); i++){
@@ -113,6 +125,9 @@ void Game:: update(){
 }
 
 void Game:: render(){
+    /*
+     * Purpose: render everything to screen
+     */
     window.clear(sf::Color::Transparent);
     drawBg();
     drawCars();
@@ -136,8 +151,9 @@ void Game:: render(){
 }
 
 void Game:: processEvents(){
-   //******THIS FUNCTION IS VERY IMPORTANT!!!********//
-   //**WINDOW WON'T SHOW IF YOU DONT HAVE THIS FUNCTION**//
+    /*
+     * Purpose: process user input
+     */
 
    sf::Event event;
    while (window.pollEvent(event))//or waitEvent
@@ -211,11 +227,16 @@ void Game:: processEvents(){
 }
 
 void Game::drawFrog(){
-    //if frog is not dead, draw the alive frog to window
+    /*
+     * Purpose: draw frog on window object
+     */
     frog.draw(window);
 }
 
 void Game:: makeCars(){
+    /*
+     * Purpose: generate all car objects and push into vector
+     */
     cout<<endl<<"making cars"<<endl;
 
     //cars in first lane...
@@ -242,6 +263,9 @@ void Game:: makeCars(){
 }
 
 Car Game:: makeCar(int lane, int posX, int model){
+    /*
+     * Purpose: generate individual car objects and return them
+     */
     cout<<endl<<"making car"<<endl;
     Car car;
     switch(lane) {
@@ -265,6 +289,9 @@ Car Game:: makeCar(int lane, int posX, int model){
 }
 
 void Game::makeLogs(){
+    /*
+     * Purpose: generate all log objects and push into vector
+     */
     cout<<endl<<"making logs"<<endl;
     //Note: water starts at row 8, ends at row 13
 
@@ -295,6 +322,9 @@ void Game::makeLogs(){
 }
 
 Log Game:: makeLog(int row, int posX, int size){
+    /*
+     * Purpose: generate individual log objects and return them
+     */
     cout<<endl<<"making log"<<endl;
     Log log;
     switch(row) {
@@ -322,6 +352,9 @@ Log Game:: makeLog(int row, int posX, int size){
 
 bool Game::collides(float x1, float y1, float w1, float l1,
                      float x2, float y2, float w2, float l2){
+    /*
+     * Purpose: given the coordinates of two objects, check if they collide
+     */
     return (
                 ((x1 <= x2+w2 && x1 >=x2) && (y1 <= y2+l2 && y1 >= y2)) ||
                 ((x1+w1 <= x2+w2 && x1+w1 >= x2) && (y1 <= y2+l2 && y1 >= y2)) ||
@@ -331,6 +364,10 @@ bool Game::collides(float x1, float y1, float w1, float l1,
 }
 
 bool Game:: carCollision(){
+    /*
+     * Purpose: check each individual car, see if anyone is
+     * colliding with the frog
+     */
     //variables...
     bool result = false;    //default to be false
 
@@ -357,6 +394,10 @@ bool Game:: carCollision(){
 }
 
 int Game:: logCollision(){
+    /*
+     * Purpose: check each individual log, see if anyone is
+     * colliding with the frog
+     */
     //variables...
     int  result = -1;    //default to be -1, no log collided
 
@@ -383,6 +424,9 @@ int Game:: logCollision(){
 }
 
 bool Game:: waterCollision(){
+    /*
+     * Purpose: see if the frog is within water
+     */
     //if frog position is between lane 8 and lane 13, return true
     //else return false
     if(frog.rowNum() >= 8 && frog.rowNum() <= 13)
@@ -391,6 +435,9 @@ bool Game:: waterCollision(){
 }
 
 void Game:: reset(){
+    /*
+     * Purpose: reset the game
+     */
     //reset frog
     Frog newFrog;
     frog = newFrog;
@@ -399,6 +446,9 @@ void Game:: reset(){
 }
 
 void Game::drawPrompt(){
+    /*
+     * Purpose: draw prompt to window object
+     */
     sf::Font font;
     if (!font.loadFromFile("assets/font.ttf"))
     {
@@ -456,6 +506,10 @@ void Game::drawPrompt(){
 }
 
 bool Game:: bounds_check(float x, float y){
+    /*
+     * Purpose: given a set of coordinates, see if the object
+     * is within screen boundaries
+     */
     if (y >= 0 && y <= SCREEN_HEIGHT && x >= 0 && x <= SCREEN_WIDTH) {
         return true;
     }else{
@@ -464,7 +518,11 @@ bool Game:: bounds_check(float x, float y){
 }
 
 bool Game::checkWin(){
-    //checks if the frog passes the last row of logs
+    /*
+     * Purpose: check if the frog has won.
+     * Note: checks if the frog passes the last row of logs
+     */
+
 
     if (frog.posY() < rows[13]){
         return true;
