@@ -1,0 +1,364 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c95825;\csgray\c0\c85000;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 Note:\
+Due to the GUI nature of this project, testing based purely on terminal output would not make much sense for a majority of the functions. For example, car_collision and log_collision function can be both tested by directly interacting with the game, rather than relying on outputs in the terminal.\
+\
+Therefore, only certain functions that can not be tested directly on the GUI are tested with terminal output, as shown below. Due to overlapping and strong similarity of code between car and log class, only car class is tested, since the log class are written in almost the exact same manner.\
+\
+Due to the lack of complexity of the Frog class, only its move() function is tested with the terminal. With each command from the user, the frog object is moved on the screen and its position is updated. With each position update, its posX and posY are outputted on the terminal, as shown below.\
+\
+Due to the fact that its composed primarily of utility functions such as collision detection and update/render functions, the Game class can be tested and has been tested directly through interacting with the game, as shown in the video: {\field{\*\fldinst{HYPERLINK "https://www.youtube.com/watch?v=gzZRH7DwR7k"}}{\fldrslt https://www.youtube.com/watch?v=gzZRH7DwR7k}}. During the testing process, no bugs were found. \
+
+\fs24 \
+\
+\
+\
+\
+\
+===============Car class==============\
+//Getters: \
+lane()\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf2 \cb3 \CocoaLigature0 current lane: 4\
+current lane: 2\
+current lane: 3\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+current lane: 3\
+current lane: 4\
+current lane: 0\
+current lane: 0\
+current lane: 1\
+current lane: 1\
+current lane: 1\
+current lane: 2\
+
+\f0\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+\
+//model()=========\
+
+\f1\fs30 \cf2 \cb3 \CocoaLigature0 model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+model: 4\
+model: 0\
+model: 0\
+model: 0\
+model: 2\
+model: 3\
+model: 1\
+model: 4\
+
+\f0\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+width(), posX(), posY=====================\
+
+\f1\fs30 \cf2 \cb3 \CocoaLigature0 \
+posx: 248; posY: 480\
+width: 55\
+posx: 736; posY: 680\
+width: 55\
+posx: 136; posY: 680\
+width: 70\
+posx: 154; posY: 630\
+width: 70\
+posx: 354; posY: 630\
+width: 70\
+posx: 854; posY: 630\
+width: 50\
+posx: 78; posY: 580\
+width: 50\
+posx: 96; posY: 530\
+width: 49\
+posx: 252; posY: 480\
+width: 55\
+posx: 738; posY: 680\
+width: 55\
+posx: 138; posY: 680\
+width: 70\
+posx: 157; posY: 630\
+width: 70\
+posx: 357; posY: 630\
+width: 70\
+posx: 857; posY: 630\
+width: 50\
+posx: 74; posY: 580\
+width: 50\
+posx: 93; posY: 530\
+width: 49\
+posx: 256; posY: 480\
+width: 55\
+posx: 740; posY: 680\
+width: 55\
+posx: 140; posY: 680\
+width: 70\
+posx: 160; posY: 630\
+width: 70\
+posx: 360; posY: 630\
+width: 70\
+posx: 860; posY: 630\
+width: 50\
+posx: 70; posY: 580\
+width: 50\
+posx: 90; posY: 530\
+width: 49\
+posx: 260; posY: 480\
+width: 55\
+posx: 742; posY: 680\
+width: 55\
+posx: 142; posY: 680\
+width: 70\
+posx: 163; posY: 630\
+width: 70\
+posx: 363; posY: 630\
+width: 70\
+posx: 863; posY: 630\
+width: 50\
+posx: 66; posY: 580\
+width: 50\
+posx: 87; posY: 530\
+width: 49\
+posx: 264; posY: 480\
+width: 55\
+posx: 744; posY: 680\
+width: 55\
+posx: 144; posY: 680\
+width: 70\
+posx: 166; posY: 630\
+width: 70\
+posx: 366; posY: 630\
+width: 70\
+posx: 866; posY: 630\
+width: 50\
+posx: 62; posY: 580\
+width: 50\
+posx: 84; posY: 530\
+width: 49\
+posx: 268; posY: 480\
+width: 55\
+posx: 746; posY: 680\
+width: 55\
+posx: 146; posY: 680\
+width: 70\
+posx: 169; posY: 630\
+width: 70\
+posx: 369; posY: 630\
+width: 70\
+posx: 869; posY: 630\
+width: 50\
+posx: 58; posY: 580\
+width: 50\
+posx: 81; posY: 530\
+width: 49\
+posx: 272; posY: 480\
+width: 55\
+posx: 748; posY: 680\
+width: 55\
+posx: 148; posY: 680\
+width: 70\
+posx: 172; posY: 630\
+width: 70\
+posx: 372; posY: 630\
+width: 70\
+posx: 872; posY: 630\
+width: 50\
+posx: 54; posY: 580\
+width: 50\
+posx: 78; posY: 530\
+width: 49\
+posx: 276; posY: 480\
+width: 55\
+posx: 750; posY: 680\
+width: 55\
+posx: 150; posY: 680\
+width: 70\
+posx: 175; posY: 630\
+width: 70\
+posx: 375; posY: 630\
+width: 70\
+posx: 875; posY: 630\
+width: 50\
+posx: 50; posY: 580\
+width: 50\
+posx: 75; posY: 530\
+width: 49\
+posx: 280; posY: 480\
+
+\f0\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 ===============Frog class==================\
+\
+move()===========\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf2 \cb3 \CocoaLigature0 _posX: 700; _posY: 390\
+R(750,390)\
+\
+_posX: 750; _posY: 390\
+D(750,450)\
+\
+_posX: 750; _posY: 450\
+move left\
+\
+L(700,450)\
+\
+_posX: 700; _posY: 450\
+U(700,390)\
+\
+_posX: 700; _posY: 390\
+move left\
+\
+L(650,390)\
+\
+_posX: 650; _posY: 390\
+move left\
+\
+L(600,390)\
+\
+_posX: 600; _posY: 390\
+move left\
+\
+L(550,390)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+}
