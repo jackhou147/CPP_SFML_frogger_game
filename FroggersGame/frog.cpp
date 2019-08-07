@@ -1,10 +1,13 @@
 #include "frog.h"
 #include <iostream>
+
 using namespace std;
+
+
 Frog::Frog()
 {
     //load texture
-    if (!frog_texture.loadFromFile("assets/frogger_sprites.png", sf::IntRect(12, 369, 23, 17)))
+    if (!frog_texture.loadFromFile("assets/frogger_sprites.png"))
     {
         // error...
         std::cout << "cannot load frogger_sprites.png" << std::endl;
@@ -14,11 +17,10 @@ Frog::Frog()
 
     //create sprite from texture
     frog_sprite.setTexture(frog_texture);
-    //scale the sprite absolutely
-    frog_sprite.setScale(
-                50 / frog_sprite.getLocalBounds().width,
-                (ROW_HEIGHT-10)/frog_sprite.getLocalBounds().height
-    );
+    frog_sprite.setTextureRect(sf::IntRect(12, 369, 18, 13));
+
+    //set scale
+    frog_sprite.setScale(1.9,1.9);
     //set position to be on the very bottom row
     frog_sprite.setPosition(SCREEN_WIDTH/2, rows[0]);
     //set rowNum
@@ -30,8 +32,8 @@ Frog::Frog()
     _posY = frog_sprite.getPosition().y;
     _log = -1;  //not on any log when starting
     _dead = -1;
-    _width = frog_sprite.getLocalBounds().width;
-
+    _width = frog_sprite.getGlobalBounds().width;
+    _length = frog_sprite.getGlobalBounds().height;
     //
     cout<<endl<<_facing
     <<"("<<_posX<<","<<_posY<<")"<<endl;
@@ -39,19 +41,31 @@ Frog::Frog()
 }
 
 void Frog::draw(sf::RenderWindow &window){
-    if (_facing == 'U' ||
-            _facing == 'D'||
-            _facing == 'L'||
-            _facing == 'R') {
-        //create sprite from texture
+    /* purpose; draws the frog facing the correct direction
+     * notes: will account for frog's death state
+     */
+    if (_dead != 1){
+
         frog_sprite.setTexture(frog_texture);
-        //scale the sprite absolutely
-        frog_sprite.setScale(
-                    50 / frog_sprite.getLocalBounds().width,
-                    (ROW_HEIGHT-8)/frog_sprite.getLocalBounds().height
-        );
-        window.draw(frog_sprite);
-    };
+        if (_facing == 'U'){
+            frog_sprite.setTextureRect(sf::IntRect(12, 369, 21, 21));
+        }
+        else if(_facing == 'D'){
+            frog_sprite.setTextureRect(sf::IntRect(81, 369, 21, 21));
+        }
+        else if(_facing == 'L'){
+            frog_sprite.setTextureRect(sf::IntRect(81, 336, 21, 21));
+
+        }
+        else if(_facing == 'R'){
+            frog_sprite.setTextureRect(sf::IntRect(12, 336, 21, 21));
+        }
+    }
+    else{
+        frog_texture.loadFromFile("assets/dead_frog.png");
+        frog_sprite.setTexture(frog_texture, true);
+    }
+    window.draw(frog_sprite);
 }
 
 void Frog::move(char dir){
@@ -87,6 +101,8 @@ void Frog::up(){
         //if frog is in any other row
         frog_sprite.setPosition(frog_sprite.getPosition().x, rows[++_rowNum]);
     }
+
+
     //update local coordinate values
     _posX = frog_sprite.getPosition().x;
     _posY = frog_sprite.getPosition().y;
@@ -99,6 +115,7 @@ void Frog::down(){
     _facing = 'D';
     //SFML position
     frog_sprite.setPosition(frog_sprite.getPosition().x, rows[--_rowNum]);
+
     //update local coordinate values
     _posX = frog_sprite.getPosition().x;
     _posY = frog_sprite.getPosition().y;
@@ -127,6 +144,8 @@ void Frog::right(){
     _posX = frog_sprite.getPosition().x;
     _posY = frog_sprite.getPosition().y;
 }
+
+
 
 
 //-----------SETTERS-------------
@@ -194,6 +213,3 @@ int Frog::posY(){
     return _posY;
 }
 
-sf::Sprite Frog::sprite(){
-    return frog_sprite;
-}
